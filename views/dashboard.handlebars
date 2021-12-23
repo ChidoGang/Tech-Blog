@@ -1,14 +1,48 @@
-{{#if posts.length}}
-<section>
-  <h2>Your Posts</h2>
-    {{#each posts as |post|}}
-      {{> dashboard-postinfo post}}
-    
-    {{/each}}
+<div class="container row">
+    <div class="col s6 dashboard-section">
+        <div class="left"
+        <div class="row">
+            <p id="id" style="display: none;">{{tutor.id}}</p>
+            <h2>{{tutor.first_name}} {{tutor.last_name}}</h2>
+            <h5>Contact Me: <span id="email">{{tutor.email}}</span></h5>
+        </div>
+        <div class="row">
+            <form class="update-form">
+                <div>
+                    <label>Enter your Subject:</label>
+                    <input id="subject" class="white-text" class="materialize-textarea">{{tutor.subject}}</input>
+                </div>
 
-</section>
-{{/if}}
+                <div>
+                    <label>Enter your Hourly Rate</label>
+                    <input id="hourly_rate" class="white-text" class="materialize-textarea">{{tutor.hourly_rate}}</input>
+                </div>
 
-<button type="submit" class="btn"><a class="link" href="/dashboard/new">+ New Post</a></button>
+                <div>
+                    <label>Enter your Description</label>
+                    <textarea id="description" class="white-text" class="materialize-textarea">{{tutor.description}}</textarea>
+                </div>
 
-<script src="/javascript/add-post.js"></script>
+                <div>
+                    <label>Enter your Interests</label>
+                    <textarea id="interest" class="white-text" class="materialize-textarea">{{tutor.interest}}</textarea>
+                </div>
+
+                <div>
+                    <label>Enter your Career</label>
+                    <textarea id="career" class="white-text" class="materialize-textarea">{{tutor.career}}</textarea>
+                </div> 
+
+                <div>
+                    <button type="submit" class=" btn">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col s6 review-section">
+        <div class="row">
+            <h2>Reviews:</h2>
+        </div>
+    </div>
+</div> 
+<script src="/javascript/update-profile.js"></script>
