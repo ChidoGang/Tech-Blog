@@ -1,0 +1,56 @@
+.nav-bar {
+    background-color:gray;
+    text-align: left;
+
+}
+
+.container-row{
+color:whitesmoke
+}
+
+.login-section {
+    background-color: black;
+    opacity: 80%;
+    color: white;
+    border: 5px solid gray;
+    margin: 20px;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.dashboard-section{
+    background-color: black;
+    opacity: 80%;
+    color: white;
+    border: 5px solid gray;
+    margin: 20px; 
+    padding: 20px; 
+    border-radius: 20px;
+}
+
+.user-profile{
+    background-color: aqua;
+    opacity: 80%;
+    color: black;
+    border: 5px solid gray;
+    margin: 20px; 
+    padding: 20px; 
+    border-radius: 20px;  
+}
+
+.create-section{
+    background-color: black;
+    opacity: 80%;
+    color: white;
+    border: 5px solid gray;
+    margin: 20px;
+    border-radius: 20px;
+    padding: 20px;
+    height:auto;
+    width: auto; 
+}
+
+.backround-section{
+    color:aliceblue
+}
+
