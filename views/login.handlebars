@@ -1,27 +1,31 @@
- <div class="col s5 login-section center">
-        <form class="user-form">
-            <div class="row">
-                <div class="col s12">
-                    <h3>Login as User</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12">
-                    <input id="user-email" class="white-text" placeholder="Email"></input>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12">
-                    <input id="user-password" class="white-text" placeholder="Password" type="password"></input>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12">
-                    <button type="submit" class="btn">Login as User</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+<div class="col s5 login-section"></div>
+<form class="login-form">
+  <h2>Login</h2>
+  <div>
+    <label for="username-login">Username:</label>
+    <input type="text" id="username-login" />
+  </div>
+  <div>
+    <label for="password-login">Password:</label>
+    <input type="password" id="password-login" />
+  </div>
+  <div>
+    <button type="submit">Login</button>
+  </div>
+</form>
 
+<form class="signup-form">
+  <h2>Sign Up</h2>
+  <div>
+    <label for="username-signup">Username:</label>
+    <input type="text" id="username-signup" />
+  </div>  
+  <div>
+    <label for="password-signup">Password:</label>
+    <input type="password" id="password-signup" />
+  </div>
+  <div>
+    <button type="submit">Signup</button>
+  </div>
+</form>
 <script src="/javascript/login.js"></script>

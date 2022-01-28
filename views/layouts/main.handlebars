@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Techblog</title>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-      <link rel="stylesheet" href="/stylesheets/style.css">
-    </head>
 
-      <nav class="nav-bar">
-        <div class="nav-wrapper">
-          <a href="#" class="brand-logo">Tech-Blog⌨ </a>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Blog</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
 
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="/">Home</a></li>
-            {{#if loggedIn}}
-              {{#if userLoggedIn}}
-                <li><a href="/dashboard" id="dashboard">Dashboard</a></li>
-              {{/if}}
-              <li><a href="/login" id="logout">Log Out</a></li>
-            {{else}}
-              <li><a href="/login">Login</a></li>
-              <li><a href="/create-account">Create Account</a></li>
-            {{/if}}
-          </ul>
-        </div>
-      </nav>
-
+<body>
+  <div class="wrapper">
+    <header>
+      <div>
+        <nav>
+          <a href="/">Home</a>
+          <a href="/dashboard">Dashboard</a>
+          {{#if loggedIn}}
+          <a href="/" id="logout">Logout</a>
+          {{else}}
+          <a href="/login">Login</a>
+          {{/if}}
+        </nav>
+      </div>
+      <div>
+        <h1 class="home-title">Tech Blog</h1>
+      </div>
+    </header>
+    <main>
       {{{ body }}}
 
-    {{#if loggedIn}}
-      <script src="/javascript/logout.js"></script>
-    {{/if}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  
-</html>    
+  {{#if loggedIn}}
+  <script src="/javascript/logout.js"></script>
+  {{/if}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+</html>

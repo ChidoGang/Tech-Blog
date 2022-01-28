@@ -1,110 +1,100 @@
 const router = require('express').Router();
-const { User,Comment } = require('../Models')
-const { withAuth, withDash, withLoggedIn } = require('../utils/auth');
+const sequelize = require('../config/connection');
+const { Post, User, Comment } = require('../models');
 
-router.get('/', withAuth, (req, res) => {
-  User.findAll({
+router.get('/', (req, res) => {
+  Post.findAll({
+    attributes: [
+      'id',
+      'title',
+      "post_text",
+      'created_at'      
+    ],
     include: [
       {
         model: Comment,
-        attributes: ['id', 'comment', 'emoji', 'stars'],
-        include:[
-          {
-            model: User,
-            attributes: ['first_name', 'last_name']
-          }
-        ]
+        attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+        include: {
+          model: User,
+          attributes: ['username']
+        }
+      },
+      {
+        model: User,
+        attributes: ['username']
       }
-      
     ]
-   }).then(dbUserData => {
-    if(!dbUserData) {
-      res.status(404).json({message:'No user found with this id'})
-      return;
-    }
-  
-    const user = dbUserData.map(user => user.get({ plain: true }));
-  
-    res.render('home-page', { 
-      user, 
-      loggedIn: req.session.loggedIn,
-      userLoggedIn: req.session.userLoggedIn,
+  })
+    .then(dbPostData => {
+      const posts = dbPostData.map(post => post.get({ plain: true }));
+      res.render('homepage', { 
+        posts,
+        loggedIn: req.session.loggedIn 
+      });
     })
-  })
-  .catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  })
-})
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
 
-router.get('/login', withLoggedIn, (req, res) => {
+router.get('/login', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
   res.render('login');
 });
 
-router.get('/create-account', withLoggedIn, (req, res) => {
-  res.render('create-account');
-});
-
-router.get('/profile/:id', withAuth, (req, res) => {
-  User.findOne({
+router.get('/post/:id', (req, res) => {
+  Post.findOne({
     where: {
       id: req.params.id
     },
+    attributes: [
+      'id',
+      'title',
+      'post_text',
+      'created_at'
+    ],
     include: [
       {
         model: Comment,
-        attributes: ['id', 'comment', 'emoji', 'stars'],
-        include:[
-          {
+        attributes: [
+          'id',
+          'comment_text',
+          'post_id',
+          'user_id',
+          'created_at'
+        ],
+        include: {
           model: User,
-            attributes: ['first_name', 'last_name']
-          }
-        ]
-      
+          attributes: ['username']
+        }
+      },
+      {
+        model: User,
+        attributes: ['username']
       }
     ]
-  }).then(dbUserData => {
-    if(!dbUserData) {
-      res.status(404).json({message:'No User found with this id.'});
+  })
+  .then(dbPostData => {
+    if (!dbPostData) {
+      res.status(404).json({ message: 'No Post found with this id' });
+      return;
     }
+ 
+    const post = dbPostData.get({ plain: true });
 
-    const user = dbUserData.get({plain:true});
-
-    res.render('user-profile', {
-      user,
-      loggedIn: req.session.loggedIn,
-      userLoggedIn: req.session.userLoggedIn
-    })
+    res.render('single-post', {
+      post, 
+      loggedIn: req.session.loggedIn
+    });
   })
   .catch(err => {
     console.log(err);
     res.status(500).json(err);
   });
 });
-
- router.get('/dashboard', withAuth, withDash, (req, res) => {
-  User.findOne({
-     where: {
-       id: req.session.user_id
-     }
-   }).then(dbUserData => {
-     if(!dbUserData) {
-       res.status(404).json({message: 'No user found with this id'});
-       return;
-     }
-
-     const user = dbUserData.get({plain: true});
-
-     res.render('dashboard', {
-       user,
-       loggedIn: req.session.loggedIn,
-       userLoggedIn: req.session.userLoggedIn
-     })
-   })
- })
-
-router.get('/introduction', (req, res) => {
-  res.render('introduction');
-})
 
 module.exports = router;

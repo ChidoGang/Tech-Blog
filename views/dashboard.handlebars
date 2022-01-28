@@ -1,34 +1,18 @@
-<div class="container row">
-    <div class="col s6 dashboard-section">
-        <div class="left"
-        <div class="row">
-            <p id="id" style="display: none;">{{user.id}}</p>
-            <h2>{{user.first_name}} {{user.last_name}}</h2>
-            <h5>Contact Me: <span id="email">{{user.email}}</span></h5>
-        </div>
-        <div class="row">
-            <form class="update-form">
-                <div>
-                    <label>Enter your Subject:</label>
-                    <input id="subject" class="white-text" class="materialize-textarea">{{user.subject}}</input>
-                </div>
+{{#if posts.length}}
+<section>
+  <h2>Your Posts</h2>
+  <ol class="post-list">
+    {{#each posts as |post|}}
+    <li>
+      {{> dashboard-post-info post}}      
+    </li>
+    {{/each}}
+  </ol>
+</section>
+{{else}}
+<section>
+  <h3>You haven't posted anything yet</h3>
+</section>
+{{/if}}
 
-                <div>
-                    <label>Enter your Description</label>
-                    <textarea id="interest" class="white-text" class="materialize-textarea">{{user.description}}</textarea>
-                </div>
-
-                <div>
-                    <button type="submit" class=" btn">Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    </div>
-    <div class="col s6 comment-section">
-        <div class="row">  
-            <h2>Comments:</h2>
-        </div>
-    </div>
-</div> 
-<script src="/javascript/update-profile.js"></script>
+<button type="submit"><a href="/dashboard/new">Add New Post</a></button>
